@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from dotenv import load_dotenv
 from langchain_community.llms import OpenAI
 from langchain.prompts import ChatPromptTemplate
 import os
@@ -8,7 +9,9 @@ import json
 
 app = Flask(__name__)
 CORS(app)
-os.environ["OPENAI_API_KEY"] = "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"  # Optional
+
+load_dotenv()
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")  # Optional
 
 @app.route('/processPrompt', methods=['POST'])
 def process_prompt():
